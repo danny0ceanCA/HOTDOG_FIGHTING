@@ -83,9 +83,9 @@ sympy==1.13.1
 textblob==0.18.0.post0
 thinc==8.3.2
 tokenizers==0.20.3
-torch==2.5.1+cpu
-torchaudio==2.5.1+cpu
-torchvision==0.20.1+cpu
+torch==2.1.0
+torchaudio==2.1.0
+torchvision==0.16.0
 tqdm==4.67.0
 transformers==4.46.3
 typer==0.13.1
