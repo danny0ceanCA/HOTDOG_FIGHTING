@@ -1,1 +1,2 @@
-"web: python application.py" 
+web: python hotdog_fighting_script.py
+
