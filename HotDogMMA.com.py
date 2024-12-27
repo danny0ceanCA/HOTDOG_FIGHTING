@@ -201,5 +201,7 @@ if __name__ == '__main__':
 
 if __name__ == '__main__':
     import os
-    port = int(os.environ.get('PORT', 8000))
-    app.run(host='0.0.0.0', port=port, debug=DEBUG_MODE)
+    port = int(os.environ.get('PORT', 8000))  # Render dynamically sets this PORT variable
+    app.run(host='0.0.0.0', port=port, debug=False)
+
+
