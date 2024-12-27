@@ -3,7 +3,6 @@
 # ------------------------
 
 import os
-from dotenv import load_dotenv  # For secure API key loading
 import feedparser  # For parsing RSS feeds
 import random  # For random shuffling
 from flask import Flask, render_template_string  # For the web interface
@@ -16,9 +15,6 @@ from apscheduler.schedulers.background import BackgroundScheduler  # For periodi
 # ------------------------
 # 📌 2. ENVIRONMENT CONFIGURATION
 # ------------------------
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Flask configuration
 DEBUG_MODE = os.getenv('DEBUG_MODE', 'False').lower() == 'true'
@@ -157,7 +153,7 @@ def aggregate_news():
     logging.info("🔄 News aggregation completed successfully.")
 
 # ------------------------
-# 📌 6. MAIN EXECUTION
+# 📌 6. FLASK WEB SERVER
 # ------------------------
 
 app = Flask(__name__)
@@ -194,14 +190,4 @@ if __name__ == '__main__':
     scheduler = BackgroundScheduler()
     scheduler.add_job(aggregate_news, 'interval', minutes=30, id='news_aggregation')
     scheduler.start()
-    try:
-        app.run(debug=DEBUG_MODE)
-    except (KeyboardInterrupt, SystemExit):
-        scheduler.shutdown()
-
-if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 8000))  # Render dynamically sets this PORT variable
-    app.run(host='0.0.0.0', port=port, debug=False)
-
-
+    app.run(host='0.0.0.0', port=8000, debug=False)
