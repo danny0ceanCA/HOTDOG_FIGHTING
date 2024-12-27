@@ -1,2 +1,2 @@
-web: python hotdog_fighting_script.py
+web: python HotDogMMA.com.py
 
