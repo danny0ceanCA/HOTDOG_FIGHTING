@@ -41,3 +41,81 @@
 2024-12-26 22:36:55,955 INFO:\u2705 Articles saved to database without duplicates.
 2024-12-26 22:36:55,956 INFO:\U0001f504 News aggregation completed successfully.
 2024-12-26 22:36:55,957 INFO:Job "aggregate_news (trigger: interval[0:30:00], next run at: 2024-12-26 23:06:47 PST)" executed successfully
+2024-12-27 08:38:49,788 INFO:\u2705 Database initialized successfully.
+2024-12-27 08:38:54,789 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-27 08:38:54,789 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-27 08:38:54,789 DEBUG:Looking up time zone info from registry
+2024-12-27 08:38:54,797 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-27 08:38:54,799 INFO:Added job "aggregate_news" to job store "default"
+2024-12-27 08:38:54,799 INFO:Scheduler started
+2024-12-27 08:38:54,800 DEBUG:Looking for jobs to run
+2024-12-27 08:38:54,800 DEBUG:Next wakeup is due at 2024-12-27 09:08:54.797878-08:00 (in 1799.997848 seconds)
+2024-12-27 08:38:54,812 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-27 08:38:54,812 INFO:[33mPress CTRL+C to quit[0m
+2024-12-27 08:41:01,510 INFO:127.0.0.1 - - [27/Dec/2024 08:41:01] "GET / HTTP/1.1" 200 -
+2024-12-27 08:41:01,604 INFO:127.0.0.1 - - [27/Dec/2024 08:41:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-12-27 09:08:54,833 DEBUG:Looking for jobs to run
+2024-12-27 09:08:54,881 INFO:Running job "aggregate_news (trigger: interval[0:30:00], next run at: 2024-12-27 09:08:54 PST)" (scheduled at 2024-12-27 09:08:54.797878-08:00)
+2024-12-27 09:08:54,894 DEBUG:Next wakeup is due at 2024-12-27 09:38:54.797878-08:00 (in 1799.903476 seconds)
+2024-12-27 09:09:03,032 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-27 09:09:03,034 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-27 09:09:03,034 INFO:Job "aggregate_news (trigger: interval[0:30:00], next run at: 2024-12-27 09:38:54 PST)" executed successfully
+2024-12-28 11:50:41,144 INFO:\u2705 Database initialized successfully.
+2024-12-28 11:50:46,947 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 11:50:46,948 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 11:50:46,949 DEBUG:Looking up time zone info from registry
+2024-12-28 11:50:46,966 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-28 11:50:46,970 INFO:Added job "aggregate_news" to job store "default"
+2024-12-28 11:50:46,970 INFO:Scheduler started
+2024-12-28 11:50:46,972 DEBUG:Looking for jobs to run
+2024-12-28 11:50:46,972 DEBUG:Next wakeup is due at 2024-12-28 12:20:46.966957-08:00 (in 1799.994892 seconds)
+2024-12-28 11:50:47,002 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 11:50:47,002 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 11:52:07,584 INFO:127.0.0.1 - - [28/Dec/2024 11:52:07] "GET / HTTP/1.1" 200 -
+2024-12-28 11:52:07,653 INFO:127.0.0.1 - - [28/Dec/2024 11:52:07] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:52:11,063 INFO:127.0.0.1 - - [28/Dec/2024 11:52:11] "GET / HTTP/1.1" 200 -
+2024-12-28 11:52:11,107 INFO:127.0.0.1 - - [28/Dec/2024 11:52:11] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:52:22,998 INFO:127.0.0.1 - - [28/Dec/2024 11:52:22] "GET / HTTP/1.1" 200 -
+2024-12-28 11:52:23,106 INFO:127.0.0.1 - - [28/Dec/2024 11:52:23] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:55:26,299 INFO:127.0.0.1 - - [28/Dec/2024 11:55:26] "GET / HTTP/1.1" 200 -
+2024-12-28 11:55:26,335 INFO:127.0.0.1 - - [28/Dec/2024 11:55:26] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:55:27,574 INFO:127.0.0.1 - - [28/Dec/2024 11:55:27] "GET / HTTP/1.1" 200 -
+2024-12-28 11:55:27,611 INFO:127.0.0.1 - - [28/Dec/2024 11:55:27] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:55:28,220 INFO:127.0.0.1 - - [28/Dec/2024 11:55:28] "GET / HTTP/1.1" 200 -
+2024-12-28 11:55:28,240 INFO:127.0.0.1 - - [28/Dec/2024 11:55:28] "[33mGET /static/logo.png HTTP/1.1[0m" 404 -
+2024-12-28 11:55:36,412 INFO:\u2705 Database initialized successfully.
+2024-12-28 11:55:41,055 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 11:55:41,055 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 11:55:41,056 DEBUG:Looking up time zone info from registry
+2024-12-28 11:55:41,067 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-28 11:55:41,069 INFO:Added job "aggregate_news" to job store "default"
+2024-12-28 11:55:41,069 INFO:Scheduler started
+2024-12-28 11:55:41,071 DEBUG:Looking for jobs to run
+2024-12-28 11:55:41,071 DEBUG:Next wakeup is due at 2024-12-28 12:25:41.067870-08:00 (in 1799.996018 seconds)
+2024-12-28 11:55:41,092 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 11:55:41,092 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 11:56:03,195 INFO:127.0.0.1 - - [28/Dec/2024 11:56:03] "GET / HTTP/1.1" 200 -
+2024-12-28 12:00:56,207 INFO:\u2705 Database initialized successfully.
+2024-12-28 12:01:01,296 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 12:01:01,297 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 12:01:01,297 DEBUG:Looking up time zone info from registry
+2024-12-28 12:01:01,307 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-28 12:01:01,309 INFO:Added job "aggregate_news" to job store "default"
+2024-12-28 12:01:01,309 INFO:Scheduler started
+2024-12-28 12:01:01,310 DEBUG:Looking for jobs to run
+2024-12-28 12:01:01,311 DEBUG:Next wakeup is due at 2024-12-28 12:31:01.307472-08:00 (in 1799.996028 seconds)
+2024-12-28 12:01:01,330 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 12:01:01,330 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 12:01:05,018 INFO:127.0.0.1 - - [28/Dec/2024 12:01:05] "GET / HTTP/1.1" 200 -

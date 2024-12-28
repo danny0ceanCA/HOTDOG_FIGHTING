@@ -116,6 +116,7 @@ def fetch_news_rss(feed_url, category):
         logging.error(f"Failed to fetch RSS feed {feed_url}: {e}")
         return []
 
+
 def save_articles_to_db(articles):
     """Save articles to the database using bulk insertion, avoiding duplicates."""
     with sqlite3.connect(DB_FILE) as conn:
@@ -137,6 +138,7 @@ def save_articles_to_db(articles):
         conn.commit()
     logging.info("✅ Articles saved to database without duplicates.")
 
+
 def aggregate_news():
     """Aggregate and randomize news from all sources without duplicates."""
     all_articles = []
@@ -151,6 +153,7 @@ def aggregate_news():
     random.shuffle(all_articles)
     save_articles_to_db(all_articles)
     logging.info("🔄 News aggregation completed successfully.")
+
 
 # ------------------------
 # 📌 6. FLASK WEB SERVER
@@ -167,22 +170,38 @@ def home():
         c.execute(f'''SELECT DISTINCT title, link, published_date FROM articles WHERE category = "Boxing" ORDER BY datetime(published_date) DESC LIMIT {ARTICLE_LIMIT}''')
         boxing_articles = [(title, link, datetime.fromisoformat(published_date).strftime('%m-%d-%Y')) for title, link, published_date in c.fetchall()]
     return render_template_string('''
-    <h1 style="text-align: center; font-size: 3em;">HOTDOG FIGHTING</h1>
-    <div style="display: flex; gap: 20px;">
-        <div><h2>MMA News</h2><ul>
-            {% for title, link, published_date in mma_articles %}
-                <li><a href="{{ link }}" target="_blank">{{ title }}</a>
-                <div>Published: {{ published_date }}</div></li>
-            {% endfor %}
-        </ul></div>
-        <div><h2>Boxing News</h2><ul>
-            {% for title, link, published_date in boxing_articles %}
-                <li><a href="{{ link }}" target="_blank">{{ title }}</a>
-                <div>Published: {{ published_date }}</div></li>
-            {% endfor %}
-        </ul></div>
-    </div>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>HOTDOG FIGHTING</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BSML4TG35"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4BSML4TG35');
+        </script>
+    </head>
+    <body>
+        <h1 style="text-align: center; font-size: 3em;">HOTDOG FIGHTING</h1>
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <div><h2>MMA News</h2><ul>
+                {% for title, link, published_date in mma_articles %}
+                    <li><a href="{{ link }}" target="_blank">{{ title }}</a>
+                    <div>Published: {{ published_date }}</div></li>
+                {% endfor %}
+            </ul></div>
+            <div><h2>Boxing News</h2><ul>
+                {% for title, link, published_date in boxing_articles %}
+                    <li><a href="{{ link }}" target="_blank">{{ title }}</a>
+                    <div>Published: {{ published_date }}</div></li>
+                {% endfor %}
+            </ul></div>
+        </div>
+    </body>
+    </html>
     ''', mma_articles=mma_articles, boxing_articles=boxing_articles)
+
 
 if __name__ == '__main__':
     init_db()
