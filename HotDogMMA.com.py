@@ -210,3 +210,4 @@ if __name__ == '__main__':
     scheduler.add_job(aggregate_news, 'interval', minutes=30, id='news_aggregation')
     scheduler.start()
     app.run(host='0.0.0.0', port=8000, debug=False)
+
