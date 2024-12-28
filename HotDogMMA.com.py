@@ -53,7 +53,6 @@ DB_FILE = 'news.db'
 # Number of articles per category to display
 ARTICLE_LIMIT = 50  # Show 50 articles per category
 
-
 # ------------------------
 # 📌 4. DATABASE SETUP
 # ------------------------
@@ -76,7 +75,6 @@ def init_db():
         c.execute('CREATE INDEX IF NOT EXISTS idx_published_date ON articles (published_date);')
         conn.commit()
     logging.info("✅ Database initialized successfully.")
-
 
 # ------------------------
 # 📌 5. NEWS AGGREGATION
@@ -154,7 +152,6 @@ def aggregate_news():
     save_articles_to_db(all_articles)
     logging.info("🔄 News aggregation completed successfully.")
 
-
 # ------------------------
 # 📌 6. FLASK WEB SERVER
 # ------------------------
@@ -185,18 +182,8 @@ def home():
     <body>
         <h1 style="text-align: center; font-size: 3em;">HOTDOG FIGHTING</h1>
         <div style="display: flex; gap: 20px; justify-content: center;">
-            <div><h2>MMA News</h2><ul>
-                {% for title, link, published_date in mma_articles %}
-                    <li><a href="{{ link }}" target="_blank">{{ title }}</a>
-                    <div>Published: {{ published_date }}</div></li>
-                {% endfor %}
-            </ul></div>
-            <div><h2>Boxing News</h2><ul>
-                {% for title, link, published_date in boxing_articles %}
-                    <li><a href="{{ link }}" target="_blank">{{ title }}</a>
-                    <div>Published: {{ published_date }}</div></li>
-                {% endfor %}
-            </ul></div>
+            <div><h2>MMA News</h2><ul>{% for title, link, published_date in mma_articles %}<li><a href="{{ link }}" target="_blank">{{ title }}</a><div>Published: {{ published_date }}</div></li>{% endfor %}</ul></div>
+            <div><h2>Boxing News</h2><ul>{% for title, link, published_date in boxing_articles %}<li><a href="{{ link }}" target="_blank">{{ title }}</a><div>Published: {{ published_date }}</div></li>{% endfor %}</ul></div>
         </div>
     </body>
     </html>
@@ -206,8 +193,4 @@ def home():
 if __name__ == '__main__':
     init_db()
     aggregate_news()
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(aggregate_news, 'interval', minutes=30, id='news_aggregation')
-    scheduler.start()
     app.run(host='0.0.0.0', port=8000, debug=False)
-
