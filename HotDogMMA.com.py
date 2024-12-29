@@ -37,13 +37,13 @@ NEWS_SOURCES = {
         'https://www.mmafighting.com/rss/index.xml',
         'https://www.ufc.com/rss/news',
         'https://www.mmaweekly.com/feed',
-        'https://www.cbssports.com/rss/headlines/mma/'  # Added CBS Sports MMA feed
+        'https://www.cbssports.com/rss/headlines/mma/'
     ],
     'Boxing': [
         'https://www.badlefthook.com/rss/index.xml',
         'https://www.boxingscene.com/rss/news.xml',
         'https://www.worldboxingnews.net/feed',
-        'https://www.cbssports.com/rss/headlines/boxing/'  # Added CBS Sports Boxing feed
+        'https://www.cbssports.com/rss/headlines/boxing/'
     ]
 }
 
@@ -114,7 +114,6 @@ def fetch_news_rss(feed_url, category):
         logging.error(f"Failed to fetch RSS feed {feed_url}: {e}")
         return []
 
-
 def save_articles_to_db(articles):
     """Save articles to the database using bulk insertion, avoiding duplicates."""
     with sqlite3.connect(DB_FILE) as conn:
@@ -135,7 +134,6 @@ def save_articles_to_db(articles):
                 logging.info(f"Skipping duplicate article: {article['link']}")
         conn.commit()
     logging.info("✅ Articles saved to database without duplicates.")
-
 
 def aggregate_news():
     """Aggregate and randomize news from all sources without duplicates."""
@@ -171,6 +169,7 @@ def home():
     <html>
     <head>
         <title>HOTDOG FIGHTING</title>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BSML4TG35"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -182,15 +181,20 @@ def home():
     <body>
         <h1 style="text-align: center; font-size: 3em;">HOTDOG FIGHTING</h1>
         <div style="display: flex; gap: 20px; justify-content: center;">
-            <div><h2>MMA News</h2><ul>{% for title, link, published_date in mma_articles %}<li><a href="{{ link }}" target="_blank">{{ title }}</a><div>Published: {{ published_date }}</div></li>{% endfor %}</ul></div>
-            <div><h2>Boxing News</h2><ul>{% for title, link, published_date in boxing_articles %}<li><a href="{{ link }}" target="_blank">{{ title }}</a><div>Published: {{ published_date }}</div></li>{% endfor %}</ul></div>
+            <div><h2>MMA News</h2><ul>
+                {% for title, link, published_date in mma_articles %}
+                    <li><a href="{{ link }}">{{ title }}</a> ({{ published_date }})</li>
+                {% endfor %}
+            </ul></div>
         </div>
     </body>
     </html>
     ''', mma_articles=mma_articles, boxing_articles=boxing_articles)
 
-
 if __name__ == '__main__':
     init_db()
     aggregate_news()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(aggregate_news, 'interval', minutes=30, id='news_aggregation')
+    scheduler.start()
     app.run(host='0.0.0.0', port=8000, debug=False)
