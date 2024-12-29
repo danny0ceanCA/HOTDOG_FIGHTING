@@ -119,3 +119,86 @@
  * Running on http://10.0.0.162:8000
 2024-12-28 12:01:01,330 INFO:[33mPress CTRL+C to quit[0m
 2024-12-28 12:01:05,018 INFO:127.0.0.1 - - [28/Dec/2024 12:01:05] "GET / HTTP/1.1" 200 -
+2024-12-28 14:54:41,304 INFO:\u2705 Database initialized successfully.
+2024-12-28 14:54:47,579 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 14:54:47,579 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 14:54:47,601 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 14:54:47,601 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 14:54:53,842 INFO:127.0.0.1 - - [28/Dec/2024 14:54:53] "GET / HTTP/1.1" 200 -
+2024-12-28 21:43:37,227 INFO:\u2705 Database initialized successfully.
+2024-12-28 21:43:43,854 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 21:43:43,856 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 21:43:43,858 DEBUG:Looking up time zone info from registry
+2024-12-28 21:43:43,876 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-28 21:43:43,879 INFO:Added job "aggregate_news" to job store "default"
+2024-12-28 21:43:43,879 INFO:Scheduler started
+2024-12-28 21:43:43,881 DEBUG:Looking for jobs to run
+2024-12-28 21:43:43,882 DEBUG:Next wakeup is due at 2024-12-28 22:13:43.875842-08:00 (in 1799.993020 seconds)
+2024-12-28 21:43:43,925 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 21:43:43,926 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 21:43:44,211 INFO:127.0.0.1 - - [28/Dec/2024 21:43:44] "GET / HTTP/1.1" 200 -
+2024-12-28 21:43:53,209 INFO:127.0.0.1 - - [28/Dec/2024 21:43:53] "GET / HTTP/1.1" 200 -
+2024-12-28 21:43:54,577 INFO:127.0.0.1 - - [28/Dec/2024 21:43:54] "GET / HTTP/1.1" 200 -
+2024-12-28 21:43:55,895 INFO:127.0.0.1 - - [28/Dec/2024 21:43:55] "GET / HTTP/1.1" 200 -
+2024-12-28 21:44:02,716 INFO:\u2705 Database initialized successfully.
+2024-12-28 21:44:08,731 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 21:44:08,731 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 21:44:08,746 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 21:44:08,746 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 21:44:09,311 INFO:127.0.0.1 - - [28/Dec/2024 21:44:09] "GET / HTTP/1.1" 200 -
+2024-12-28 21:47:52,315 INFO:127.0.0.1 - - [28/Dec/2024 21:47:52] "GET / HTTP/1.1" 200 -
+2024-12-28 21:47:55,792 INFO:127.0.0.1 - - [28/Dec/2024 21:47:55] "GET / HTTP/1.1" 200 -
+2024-12-28 21:47:56,990 INFO:127.0.0.1 - - [28/Dec/2024 21:47:56] "GET / HTTP/1.1" 200 -
+2024-12-28 21:48:03,123 INFO:\u2705 Database initialized successfully.
+2024-12-28 21:48:08,215 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 21:48:08,216 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 21:48:08,240 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 21:48:08,240 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 21:48:11,262 INFO:127.0.0.1 - - [28/Dec/2024 21:48:11] "GET / HTTP/1.1" 200 -
+2024-12-28 21:48:12,929 INFO:127.0.0.1 - - [28/Dec/2024 21:48:12] "GET / HTTP/1.1" 200 -
+2024-12-28 21:48:13,849 INFO:127.0.0.1 - - [28/Dec/2024 21:48:13] "GET / HTTP/1.1" 200 -
+2024-12-28 21:48:14,103 INFO:127.0.0.1 - - [28/Dec/2024 21:48:14] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:21,695 INFO:127.0.0.1 - - [28/Dec/2024 21:50:21] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:23,344 INFO:127.0.0.1 - - [28/Dec/2024 21:50:23] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:24,163 INFO:127.0.0.1 - - [28/Dec/2024 21:50:24] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:24,982 INFO:127.0.0.1 - - [28/Dec/2024 21:50:24] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:25,206 INFO:127.0.0.1 - - [28/Dec/2024 21:50:25] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:26,525 INFO:127.0.0.1 - - [28/Dec/2024 21:50:26] "GET / HTTP/1.1" 200 -
+2024-12-28 21:50:33,562 INFO:\u2705 Database initialized successfully.
+2024-12-28 21:50:38,929 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 21:50:38,929 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 21:50:38,947 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 21:50:38,947 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 21:50:41,624 INFO:127.0.0.1 - - [28/Dec/2024 21:50:41] "GET / HTTP/1.1" 200 -
+2024-12-28 21:53:11,935 INFO:127.0.0.1 - - [28/Dec/2024 21:53:11] "GET / HTTP/1.1" 200 -
+2024-12-28 21:53:13,903 INFO:127.0.0.1 - - [28/Dec/2024 21:53:13] "GET / HTTP/1.1" 200 -
+2024-12-28 21:53:20,676 INFO:\u2705 Database initialized successfully.
+2024-12-28 21:53:25,657 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-28 21:53:25,658 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-28 21:53:25,658 DEBUG:Looking up time zone info from registry
+2024-12-28 21:53:25,683 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-28 21:53:25,685 INFO:Added job "aggregate_news" to job store "default"
+2024-12-28 21:53:25,685 INFO:Scheduler started
+2024-12-28 21:53:25,686 DEBUG:Looking for jobs to run
+2024-12-28 21:53:25,687 DEBUG:Next wakeup is due at 2024-12-28 22:23:25.683087-08:00 (in 1799.996592 seconds)
+2024-12-28 21:53:25,709 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-28 21:53:25,709 INFO:[33mPress CTRL+C to quit[0m
+2024-12-28 21:53:28,665 INFO:127.0.0.1 - - [28/Dec/2024 21:53:28] "GET / HTTP/1.1" 200 -

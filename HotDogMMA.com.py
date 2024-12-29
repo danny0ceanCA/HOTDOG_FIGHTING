@@ -37,13 +37,13 @@ NEWS_SOURCES = {
         'https://www.mmafighting.com/rss/index.xml',
         'https://www.ufc.com/rss/news',
         'https://www.mmaweekly.com/feed',
-        'https://www.cbssports.com/rss/headlines/mma/'
+        'https://www.cbssports.com/rss/headlines/mma/'  # Added CBS Sports MMA feed
     ],
     'Boxing': [
         'https://www.badlefthook.com/rss/index.xml',
         'https://www.boxingscene.com/rss/news.xml',
         'https://www.worldboxingnews.net/feed',
-        'https://www.cbssports.com/rss/headlines/boxing/'
+        'https://www.cbssports.com/rss/headlines/boxing/'  # Added CBS Sports Boxing feed
     ]
 }
 
@@ -52,6 +52,7 @@ DB_FILE = 'news.db'
 
 # Number of articles per category to display
 ARTICLE_LIMIT = 50  # Show 50 articles per category
+
 
 # ------------------------
 # 📌 4. DATABASE SETUP
@@ -75,6 +76,7 @@ def init_db():
         c.execute('CREATE INDEX IF NOT EXISTS idx_published_date ON articles (published_date);')
         conn.commit()
     logging.info("✅ Database initialized successfully.")
+
 
 # ------------------------
 # 📌 5. NEWS AGGREGATION
@@ -114,6 +116,7 @@ def fetch_news_rss(feed_url, category):
         logging.error(f"Failed to fetch RSS feed {feed_url}: {e}")
         return []
 
+
 def save_articles_to_db(articles):
     """Save articles to the database using bulk insertion, avoiding duplicates."""
     with sqlite3.connect(DB_FILE) as conn:
@@ -135,6 +138,7 @@ def save_articles_to_db(articles):
         conn.commit()
     logging.info("✅ Articles saved to database without duplicates.")
 
+
 def aggregate_news():
     """Aggregate and randomize news from all sources without duplicates."""
     all_articles = []
@@ -149,6 +153,7 @@ def aggregate_news():
     random.shuffle(all_articles)
     save_articles_to_db(all_articles)
     logging.info("🔄 News aggregation completed successfully.")
+
 
 # ------------------------
 # 📌 6. FLASK WEB SERVER
@@ -169,27 +174,34 @@ def home():
     <html>
     <head>
         <title>HOTDOG FIGHTING</title>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BSML4TG35"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-4BSML4TG35');
-        </script>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            h1 { text-align: center; font-size: 3em; }
+            .news-container { display: flex; gap: 20px; justify-content: space-around; }
+            .news-section h2 { margin-bottom: 10px; }
+            .news-section ul { list-style-type: none; padding: 0; }
+            .news-section li { margin-bottom: 8px; }
+            .published-date { font-size: 0.8em; color: gray; margin-left: 10px; }
+        </style>
     </head>
     <body>
-        <h1 style="text-align: center; font-size: 3em;">HOTDOG FIGHTING</h1>
-        <div style="display: flex; gap: 20px; justify-content: center;">
-            <div><h2>MMA News</h2><ul>
+        <h1>HOTDOG FIGHTING</h1>
+        <div class="news-container">
+            <div class="news-section"><h2>MMA News</h2><ul>
                 {% for title, link, published_date in mma_articles %}
-                    <li><a href="{{ link }}">{{ title }}</a> ({{ published_date }})</li>
+                    <li><a href="{{ link }}">{{ title }}</a><span class="published-date"> (Published: {{ published_date }})</span></li>
+                {% endfor %}
+            </ul></div>
+            <div class="news-section"><h2>Boxing News</h2><ul>
+                {% for title, link, published_date in boxing_articles %}
+                    <li><a href="{{ link }}">{{ title }}</a><span class="published-date"> (Published: {{ published_date }})</span></li>
                 {% endfor %}
             </ul></div>
         </div>
     </body>
     </html>
     ''', mma_articles=mma_articles, boxing_articles=boxing_articles)
+
 
 if __name__ == '__main__':
     init_db()
