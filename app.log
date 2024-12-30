@@ -320,3 +320,14 @@
 2024-12-29 23:15:21,859 INFO:[33mPress CTRL+C to quit[0m
 2024-12-29 23:15:25,065 INFO:127.0.0.1 - - [29/Dec/2024 23:15:25] "GET / HTTP/1.1" 200 -
 2024-12-30 00:28:40,568 INFO:127.0.0.1 - - [30/Dec/2024 00:28:40] "GET / HTTP/1.1" 200 -
+2024-12-30 08:23:02,849 INFO:127.0.0.1 - - [30/Dec/2024 08:23:02] "GET / HTTP/1.1" 200 -
+2024-12-30 15:22:58,118 INFO:\u2705 Database initialized successfully.
+2024-12-30 15:23:04,792 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-30 15:23:04,792 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-30 15:23:04,819 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-30 15:23:04,819 INFO:[33mPress CTRL+C to quit[0m
+2024-12-30 15:23:05,376 INFO:127.0.0.1 - - [30/Dec/2024 15:23:05] "GET / HTTP/1.1" 200 -
+2024-12-30 15:23:07,672 INFO:127.0.0.1 - - [30/Dec/2024 15:23:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
