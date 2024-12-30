@@ -202,3 +202,121 @@
  * Running on http://10.0.0.162:8000
 2024-12-28 21:53:25,709 INFO:[33mPress CTRL+C to quit[0m
 2024-12-28 21:53:28,665 INFO:127.0.0.1 - - [28/Dec/2024 21:53:28] "GET / HTTP/1.1" 200 -
+2024-12-29 09:52:17,826 INFO:127.0.0.1 - - [29/Dec/2024 09:52:17] "GET / HTTP/1.1" 200 -
+2024-12-29 09:52:20,068 INFO:127.0.0.1 - - [29/Dec/2024 09:52:20] "GET / HTTP/1.1" 200 -
+2024-12-29 09:52:26,431 INFO:\u2705 Database initialized successfully.
+2024-12-29 09:52:32,134 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 09:52:32,134 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 09:52:32,135 DEBUG:Looking up time zone info from registry
+2024-12-29 09:52:32,154 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 09:52:32,157 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 09:52:32,157 INFO:Scheduler started
+2024-12-29 09:52:32,158 DEBUG:Looking for jobs to run
+2024-12-29 09:52:32,158 DEBUG:Next wakeup is due at 2024-12-29 10:22:32.154591-08:00 (in 1799.996003 seconds)
+2024-12-29 09:52:32,178 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 09:52:32,178 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 09:55:12,723 INFO:127.0.0.1 - - [29/Dec/2024 09:55:12] "GET / HTTP/1.1" 200 -
+2024-12-29 10:09:45,008 INFO:\u2705 Database initialized successfully.
+2024-12-29 10:09:51,278 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 10:09:51,278 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 10:09:51,279 DEBUG:Looking up time zone info from registry
+2024-12-29 10:09:51,286 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 10:09:51,288 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 10:09:51,288 INFO:Scheduler started
+2024-12-29 10:09:51,289 DEBUG:Looking for jobs to run
+2024-12-29 10:09:51,289 DEBUG:Next wakeup is due at 2024-12-29 10:39:51.286126-08:00 (in 1799.996824 seconds)
+2024-12-29 10:09:51,303 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 10:09:51,303 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 10:09:51,471 INFO:127.0.0.1 - - [29/Dec/2024 10:09:51] "GET / HTTP/1.1" 200 -
+2024-12-29 22:58:04,678 INFO:\u2705 Database initialized successfully.
+2024-12-29 22:58:12,817 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 22:58:12,817 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 22:58:12,818 DEBUG:Looking up time zone info from registry
+2024-12-29 22:58:12,834 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 22:58:12,836 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 22:58:12,836 INFO:Scheduler started
+2024-12-29 22:58:12,838 DEBUG:Looking for jobs to run
+2024-12-29 22:58:12,839 DEBUG:Next wakeup is due at 2024-12-29 23:28:12.834194-08:00 (in 1799.994952 seconds)
+2024-12-29 22:58:12,876 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 22:58:12,877 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 22:58:16,247 INFO:127.0.0.1 - - [29/Dec/2024 22:58:16] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-29 22:58:17,166 INFO:127.0.0.1 - - [29/Dec/2024 22:58:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-12-29 22:58:19,313 INFO:127.0.0.1 - - [29/Dec/2024 22:58:19] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-29 22:58:28,038 INFO:127.0.0.1 - - [29/Dec/2024 22:58:28] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-29 22:58:29,126 INFO:127.0.0.1 - - [29/Dec/2024 22:58:29] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-29 23:01:01,999 INFO:\u2705 Database initialized successfully.
+2024-12-29 23:01:07,222 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 23:01:07,222 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 23:01:07,222 DEBUG:Looking up time zone info from registry
+2024-12-29 23:01:07,227 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 23:01:07,228 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 23:01:07,228 INFO:Scheduler started
+2024-12-29 23:01:07,229 DEBUG:Looking for jobs to run
+2024-12-29 23:01:07,229 DEBUG:Next wakeup is due at 2024-12-29 23:31:07.227467-08:00 (in 1799.998001 seconds)
+2024-12-29 23:01:07,242 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 23:01:07,242 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 23:01:07,366 INFO:127.0.0.1 - - [29/Dec/2024 23:01:07] "GET / HTTP/1.1" 200 -
+2024-12-29 23:02:52,015 INFO:127.0.0.1 - - [29/Dec/2024 23:02:52] "GET / HTTP/1.1" 200 -
+2024-12-29 23:03:35,856 INFO:\u2705 Database initialized successfully.
+2024-12-29 23:03:41,353 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 23:03:41,353 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 23:03:41,353 DEBUG:Looking up time zone info from registry
+2024-12-29 23:03:41,356 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 23:03:41,357 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 23:03:41,357 INFO:Scheduler started
+2024-12-29 23:03:41,358 DEBUG:Looking for jobs to run
+2024-12-29 23:03:41,358 DEBUG:Next wakeup is due at 2024-12-29 23:33:41.356759-08:00 (in 1799.997992 seconds)
+2024-12-29 23:03:41,375 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 23:03:41,375 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 23:03:41,917 INFO:127.0.0.1 - - [29/Dec/2024 23:03:41] "GET / HTTP/1.1" 200 -
+2024-12-29 23:05:49,039 INFO:\u2705 Database initialized successfully.
+2024-12-29 23:05:54,196 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 23:05:54,197 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 23:05:54,197 DEBUG:Looking up time zone info from registry
+2024-12-29 23:05:54,201 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-12-29 23:05:54,201 INFO:Added job "aggregate_news" to job store "default"
+2024-12-29 23:05:54,202 INFO:Scheduler started
+2024-12-29 23:05:54,202 DEBUG:Looking for jobs to run
+2024-12-29 23:05:54,202 DEBUG:Next wakeup is due at 2024-12-29 23:35:54.201308-08:00 (in 1799.999001 seconds)
+2024-12-29 23:05:54,213 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 23:05:54,213 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 23:05:54,355 INFO:127.0.0.1 - - [29/Dec/2024 23:05:54] "GET / HTTP/1.1" 200 -
+2024-12-29 23:08:08,710 INFO:\u2705 Database initialized successfully.
+2024-12-29 23:08:15,258 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 23:08:15,258 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 23:08:15,277 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 23:08:15,278 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 23:08:21,062 INFO:127.0.0.1 - - [29/Dec/2024 23:08:21] "GET / HTTP/1.1" 200 -
+2024-12-29 23:15:08,313 INFO:127.0.0.1 - - [29/Dec/2024 23:15:08] "GET / HTTP/1.1" 200 -
+2024-12-29 23:15:09,788 INFO:127.0.0.1 - - [29/Dec/2024 23:15:09] "GET / HTTP/1.1" 200 -
+2024-12-29 23:15:16,000 INFO:\u2705 Database initialized successfully.
+2024-12-29 23:15:21,837 INFO:\u2705 Articles saved to database without duplicates.
+2024-12-29 23:15:21,837 INFO:\U0001f504 News aggregation completed successfully.
+2024-12-29 23:15:21,859 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2024-12-29 23:15:21,859 INFO:[33mPress CTRL+C to quit[0m
+2024-12-29 23:15:25,065 INFO:127.0.0.1 - - [29/Dec/2024 23:15:25] "GET / HTTP/1.1" 200 -
+2024-12-30 00:28:40,568 INFO:127.0.0.1 - - [30/Dec/2024 00:28:40] "GET / HTTP/1.1" 200 -

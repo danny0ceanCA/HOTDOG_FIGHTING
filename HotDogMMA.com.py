@@ -34,16 +34,15 @@ logging.basicConfig(
 NEWS_SOURCES = {
     'MMA': [
         'https://www.bloodyelbow.com/rss/index.xml',
-        'https://www.mmafighting.com/rss/index.xml',
+        'https://www.lowkickmma.com/feed/',
+        'https://www.mmamania.com/rss/index.xml',
         'https://www.ufc.com/rss/news',
-        'https://www.mmaweekly.com/feed',
-        'https://www.cbssports.com/rss/headlines/mma/'  # Added CBS Sports MMA feed
+        'https://www.mmaweekly.com/feed'
     ],
     'Boxing': [
         'https://www.badlefthook.com/rss/index.xml',
         'https://www.boxingscene.com/rss/news.xml',
-        'https://www.worldboxingnews.net/feed',
-        'https://www.cbssports.com/rss/headlines/boxing/'  # Added CBS Sports Boxing feed
+        'https://www.worldboxingnews.net/feed'
     ]
 }
 
@@ -109,7 +108,7 @@ def fetch_news_rss(feed_url, category):
                 })
                 seen_links.add(entry.link)
 
-        # Sort articles by published date (most recent first)
+        # Sort articles by published date (newest to oldest)
         articles.sort(key=lambda x: x['published_date'], reverse=True)
         return articles
     except Exception as e:
@@ -150,7 +149,6 @@ def aggregate_news():
                 if article['link'] not in processed_links:
                     all_articles.append(article)
                     processed_links.add(article['link'])
-    random.shuffle(all_articles)
     save_articles_to_db(all_articles)
     logging.info("🔄 News aggregation completed successfully.")
 
@@ -161,27 +159,40 @@ def aggregate_news():
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     with sqlite3.connect(DB_FILE) as conn:
         c = conn.cursor()
-        c.execute(f'''SELECT DISTINCT title, link, published_date FROM articles WHERE category = "MMA" ORDER BY datetime(published_date) DESC LIMIT {ARTICLE_LIMIT}''')
-        mma_articles = [(title, link, datetime.fromisoformat(published_date).strftime('%m-%d-%Y')) for title, link, published_date in c.fetchall()]
-        c.execute(f'''SELECT DISTINCT title, link, published_date FROM articles WHERE category = "Boxing" ORDER BY datetime(published_date) DESC LIMIT {ARTICLE_LIMIT}''')
-        boxing_articles = [(title, link, datetime.fromisoformat(published_date).strftime('%m-%d-%Y')) for title, link, published_date in c.fetchall()]
+
+        # Fetch MMA articles
+        c.execute(
+            f'''SELECT DISTINCT title, link, published_date FROM articles WHERE category = "MMA" 
+                ORDER BY datetime(published_date) DESC LIMIT {ARTICLE_LIMIT}'''
+        )
+        mma_articles = [(title, link, f"Published on: {datetime.fromisoformat(published_date).strftime('%m-%d-%Y')}")
+                        for title, link, published_date in c.fetchall()]
+
+        # Fetch Boxing articles
+        c.execute(
+            f'''SELECT DISTINCT title, link, published_date FROM articles WHERE category = "Boxing" 
+                ORDER BY datetime(published_date) DESC LIMIT {ARTICLE_LIMIT}'''
+        )
+        boxing_articles = [(title, link, f"Published on: {datetime.fromisoformat(published_date).strftime('%m-%d-%Y')}")
+                           for title, link, published_date in c.fetchall()]
+
     return render_template_string('''
     <!DOCTYPE html>
     <html>
     <head>
         <title>HOTDOG FIGHTING</title>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
         <style>
             body { font-family: Arial, sans-serif; }
             h1 { text-align: center; font-size: 3em; }
             .news-container { display: flex; gap: 20px; justify-content: space-around; }
-            .news-section h2 { margin-bottom: 10px; }
             .news-section ul { list-style-type: none; padding: 0; }
             .news-section li { margin-bottom: 8px; }
-            .published-date { font-size: 0.8em; color: gray; margin-left: 10px; }
         </style>
     </head>
     <body>
@@ -189,12 +200,12 @@ def home():
         <div class="news-container">
             <div class="news-section"><h2>MMA News</h2><ul>
                 {% for title, link, published_date in mma_articles %}
-                    <li><a href="{{ link }}">{{ title }}</a><span class="published-date"> (Published: {{ published_date }})</span></li>
+                    <li><a href="{{ link }}">{{ title }}</a><span> ({{ published_date }})</span></li>
                 {% endfor %}
             </ul></div>
             <div class="news-section"><h2>Boxing News</h2><ul>
                 {% for title, link, published_date in boxing_articles %}
-                    <li><a href="{{ link }}">{{ title }}</a><span class="published-date"> (Published: {{ published_date }})</span></li>
+                    <li><a href="{{ link }}">{{ title }}</a><span> ({{ published_date }})</span></li>
                 {% endfor %}
             </ul></div>
         </div>
@@ -206,7 +217,4 @@ def home():
 if __name__ == '__main__':
     init_db()
     aggregate_news()
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(aggregate_news, 'interval', minutes=30, id='news_aggregation')
-    scheduler.start()
     app.run(host='0.0.0.0', port=8000, debug=False)
