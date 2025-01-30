@@ -199,7 +199,7 @@ def home():
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'YOUR_MEASUREMENT_ID');
+        gtag('config', 'G-4BSML4TG35');
     </script>
     <!-- Ads Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
