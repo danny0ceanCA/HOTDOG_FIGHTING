@@ -243,7 +243,7 @@ def home():
     ''', mma_articles=mma_articles, boxing_articles=boxing_articles)
 
 # ------------------------
-# 📌 7. MAIN ENTRY POINT.
+# 📌 7. MAIN ENTRY POINT
 # ------------------------
 if __name__ == '__main__':
     # 1. Initialize the database
