@@ -190,18 +190,27 @@ def home():
 
     return render_template_string('''
     <!DOCTYPE html>
-    <html>
-    <head>
-        <title>HOTDOG FIGHTING</title>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
-        <style>
-            body { font-family: Arial, sans-serif; }
-            h1 { text-align: center; font-size: 3em; }
-            .news-container { display: flex; gap: 20px; justify-content: space-around; }
-            .news-section ul { list-style-type: none; padding: 0; }
-            .news-section li { margin-bottom: 8px; }
-        </style>
-    </head>
+<html>
+<head>
+    <title>HOTDOG FIGHTING</title>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BSML4TG35"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_MEASUREMENT_ID');
+    </script>
+    <!-- Ads Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { text-align: center; font-size: 3em; }
+        .news-container { display: flex; gap: 20px; justify-content: space-around; }
+        .news-section ul { list-style-type: none; padding: 0; }
+        .news-section li { margin-bottom: 8px; }
+    </style>
+</head>
     <body>
         <h1>HOTDOG FIGHTING</h1>
         <div class="news-container">

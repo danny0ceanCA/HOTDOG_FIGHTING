@@ -350,3 +350,35 @@
 2025-01-12 07:24:12,414 INFO:[33mPress CTRL+C to quit[0m
 2025-01-12 07:24:21,769 INFO:127.0.0.1 - - [12/Jan/2025 07:24:21] "GET / HTTP/1.1" 200 -
 2025-01-12 07:24:22,334 INFO:127.0.0.1 - - [12/Jan/2025 07:24:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-01-29 21:24:52,085 INFO:\u2705 Database initialized successfully.
+2025-01-29 21:24:58,840 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-29 21:24:58,840 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-29 21:24:58,841 DEBUG:Looking up time zone info from registry
+2025-01-29 21:24:58,850 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-29 21:24:58,852 INFO:Added job "aggregate_news" to job store "default"
+2025-01-29 21:24:58,852 INFO:Scheduler started
+2025-01-29 21:24:58,853 DEBUG:Looking for jobs to run
+2025-01-29 21:24:58,853 DEBUG:Next wakeup is due at 2025-01-29 21:34:58.850247-08:00 (in 599.996717 seconds)
+2025-01-29 21:24:58,878 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2025-01-29 21:24:58,878 INFO:[33mPress CTRL+C to quit[0m
+2025-01-29 21:25:01,371 INFO:127.0.0.1 - - [29/Jan/2025 21:25:01] "GET / HTTP/1.1" 200 -
+2025-01-29 21:25:02,283 INFO:127.0.0.1 - - [29/Jan/2025 21:25:02] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-01-29 21:25:15,493 INFO:127.0.0.1 - - [29/Jan/2025 21:25:15] "GET / HTTP/1.1" 200 -
+2025-01-29 21:50:13,646 INFO:\u2705 Database initialized successfully.
+2025-01-29 21:50:20,337 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-29 21:50:20,337 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-29 21:50:20,338 DEBUG:Looking up time zone info from registry
+2025-01-29 21:50:20,355 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-29 21:50:20,357 INFO:Added job "aggregate_news" to job store "default"
+2025-01-29 21:50:20,357 INFO:Scheduler started
+2025-01-29 21:50:20,358 DEBUG:Looking for jobs to run
+2025-01-29 21:50:20,359 DEBUG:Next wakeup is due at 2025-01-29 22:00:20.354852-08:00 (in 599.995235 seconds)
+2025-01-29 21:50:20,386 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2025-01-29 21:50:20,386 INFO:[33mPress CTRL+C to quit[0m
+2025-01-29 21:50:20,547 INFO:127.0.0.1 - - [29/Jan/2025 21:50:20] "GET / HTTP/1.1" 200 -
