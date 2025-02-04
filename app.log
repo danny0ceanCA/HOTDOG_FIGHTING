@@ -382,3 +382,76 @@
  * Running on http://10.0.0.162:8000
 2025-01-29 21:50:20,386 INFO:[33mPress CTRL+C to quit[0m
 2025-01-29 21:50:20,547 INFO:127.0.0.1 - - [29/Jan/2025 21:50:20] "GET / HTTP/1.1" 200 -
+2025-01-30 06:26:06,207 DEBUG:Looking for jobs to run
+2025-01-30 06:26:06,224 WARNING:Run time of job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-29 22:00:20 PST)" was missed by 0:05:45.868894
+2025-01-30 06:26:06,226 DEBUG:Next wakeup is due at 2025-01-30 06:30:20.354852-08:00 (in 254.128014 seconds)
+2025-01-30 06:30:20,367 DEBUG:Looking for jobs to run
+2025-01-30 06:30:20,368 DEBUG:Next wakeup is due at 2025-01-30 06:40:20.354852-08:00 (in 599.985883 seconds)
+2025-01-30 06:30:20,368 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 06:40:20 PST)" (scheduled at 2025-01-30 06:30:20.354852-08:00)
+2025-01-30 06:30:27,215 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 06:30:27,216 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 06:30:27,217 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 06:40:20 PST)" executed successfully
+2025-01-30 06:40:20,366 DEBUG:Looking for jobs to run
+2025-01-30 06:40:20,367 DEBUG:Next wakeup is due at 2025-01-30 06:50:20.354852-08:00 (in 599.987162 seconds)
+2025-01-30 06:40:20,367 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 06:50:20 PST)" (scheduled at 2025-01-30 06:40:20.354852-08:00)
+2025-01-30 06:40:28,608 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 06:40:28,608 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 06:40:28,609 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 06:50:20 PST)" executed successfully
+2025-01-30 06:50:20,366 DEBUG:Looking for jobs to run
+2025-01-30 06:50:20,367 DEBUG:Next wakeup is due at 2025-01-30 07:00:20.354852-08:00 (in 599.987223 seconds)
+2025-01-30 06:50:20,368 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:00:20 PST)" (scheduled at 2025-01-30 06:50:20.354852-08:00)
+2025-01-30 06:50:27,965 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 06:50:27,965 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 06:50:27,965 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:00:20 PST)" executed successfully
+2025-01-30 07:00:20,366 DEBUG:Looking for jobs to run
+2025-01-30 07:00:20,367 DEBUG:Next wakeup is due at 2025-01-30 07:10:20.354852-08:00 (in 599.987799 seconds)
+2025-01-30 07:00:20,367 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:10:20 PST)" (scheduled at 2025-01-30 07:00:20.354852-08:00)
+2025-01-30 07:00:26,577 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:00:26,577 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:00:26,578 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:10:20 PST)" executed successfully
+2025-01-30 07:10:20,355 DEBUG:Looking for jobs to run
+2025-01-30 07:10:20,356 DEBUG:Next wakeup is due at 2025-01-30 07:20:20.354852-08:00 (in 599.998421 seconds)
+2025-01-30 07:10:20,357 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:20:20 PST)" (scheduled at 2025-01-30 07:10:20.354852-08:00)
+2025-01-30 07:10:26,472 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:10:26,472 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:10:26,473 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:20:20 PST)" executed successfully
+2025-01-30 07:20:20,368 DEBUG:Looking for jobs to run
+2025-01-30 07:20:20,369 DEBUG:Next wakeup is due at 2025-01-30 07:30:20.354852-08:00 (in 599.985622 seconds)
+2025-01-30 07:20:20,370 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:30:20 PST)" (scheduled at 2025-01-30 07:20:20.354852-08:00)
+2025-01-30 07:20:28,821 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:20:28,821 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:20:28,822 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:30:20 PST)" executed successfully
+2025-01-30 07:30:20,368 DEBUG:Looking for jobs to run
+2025-01-30 07:30:20,369 DEBUG:Next wakeup is due at 2025-01-30 07:40:20.354852-08:00 (in 599.985092 seconds)
+2025-01-30 07:30:20,369 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:40:20 PST)" (scheduled at 2025-01-30 07:30:20.354852-08:00)
+2025-01-30 07:30:28,993 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:30:28,993 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:30:28,995 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:40:20 PST)" executed successfully
+2025-01-30 07:40:20,357 DEBUG:Looking for jobs to run
+2025-01-30 07:40:20,358 DEBUG:Next wakeup is due at 2025-01-30 07:50:20.354852-08:00 (in 599.996405 seconds)
+2025-01-30 07:40:20,358 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:50:20 PST)" (scheduled at 2025-01-30 07:40:20.354852-08:00)
+2025-01-30 07:40:27,902 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:40:27,902 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:40:27,902 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 07:50:20 PST)" executed successfully
+2025-01-30 07:42:13,314 INFO:127.0.0.1 - - [30/Jan/2025 07:42:13] "GET / HTTP/1.1" 200 -
+2025-01-30 07:50:20,366 DEBUG:Looking for jobs to run
+2025-01-30 07:50:20,368 DEBUG:Next wakeup is due at 2025-01-30 08:00:20.354852-08:00 (in 599.986201 seconds)
+2025-01-30 07:50:20,368 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 08:00:20 PST)" (scheduled at 2025-01-30 07:50:20.354852-08:00)
+2025-01-30 07:50:27,502 INFO:\u2705 Articles saved to database without duplicates.
+2025-01-30 07:50:27,503 INFO:\U0001f504 News aggregation completed successfully.
+2025-01-30 07:50:27,503 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-01-30 08:00:20 PST)" executed successfully
+2025-02-03 23:19:32,610 INFO:\u2705 Database initialized successfully.
+2025-02-03 23:19:38,465 INFO:\u2705 Articles saved to database without duplicates.
+2025-02-03 23:19:38,466 INFO:\U0001f504 News aggregation completed successfully.
+2025-02-03 23:19:38,467 DEBUG:Looking up time zone info from registry
+2025-02-03 23:19:38,480 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-02-03 23:19:38,482 INFO:Added job "aggregate_news" to job store "default"
+2025-02-03 23:19:38,482 INFO:Scheduler started
+2025-02-03 23:19:38,484 DEBUG:Looking for jobs to run
+2025-02-03 23:19:38,484 DEBUG:Next wakeup is due at 2025-02-03 23:29:38.480616-08:00 (in 599.996013 seconds)
+2025-02-03 23:19:38,514 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2025-02-03 23:19:38,514 INFO:[33mPress CTRL+C to quit[0m
+2025-02-03 23:19:38,802 INFO:127.0.0.1 - - [03/Feb/2025 23:19:38] "GET / HTTP/1.1" 200 -

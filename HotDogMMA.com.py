@@ -36,6 +36,7 @@ NEWS_SOURCES = {
         'https://www.lowkickmma.com/feed/',
         'https://www.mmamania.com/rss/index.xml',
         'https://www.ufc.com/rss/news',
+        'https://www.mmafighting.com/rss'
         'https://www.mmaweekly.com/feed'
     ],
     'Boxing': [
