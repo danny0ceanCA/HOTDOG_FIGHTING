@@ -38,6 +38,7 @@ NEWS_SOURCES = {
         'https://www.ufc.com/rss/news',
         'https://www.mmafighting.com/rss'
         'https://www.mmaweekly.com/feed'
+        #MMAFEEDS
     ],
     'Boxing': [
         'https://www.badlefthook.com/rss/index.xml',
