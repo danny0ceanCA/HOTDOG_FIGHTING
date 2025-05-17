@@ -216,6 +216,6 @@ if __name__ == '__main__':
     init_db()
     aggregate_news()
     scheduler = BackgroundScheduler()
-    scheduler.add_job(aggregate_news, 'interval', minutes=10)
+    scheduler.add_job(aggregate_news, 'interval', minutes=90)
     scheduler.start()
     app.run(host='0.0.0.0', port=8000, debug=False)

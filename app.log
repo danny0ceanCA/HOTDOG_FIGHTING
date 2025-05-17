@@ -455,3 +455,26 @@
  * Running on http://10.0.0.162:8000
 2025-02-03 23:19:38,514 INFO:[33mPress CTRL+C to quit[0m
 2025-02-03 23:19:38,802 INFO:127.0.0.1 - - [03/Feb/2025 23:19:38] "GET / HTTP/1.1" 200 -
+2025-05-16 21:06:56,630 INFO:\u2705 Database initialized.
+2025-05-16 21:07:04,997 INFO:\u2705 Articles saved to DB.
+2025-05-16 21:07:04,997 INFO:\U0001f504 Aggregation complete.
+2025-05-16 21:07:04,997 DEBUG:Looking up time zone info from registry
+2025-05-16 21:07:05,013 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-16 21:07:05,016 INFO:Added job "aggregate_news" to job store "default"
+2025-05-16 21:07:05,016 INFO:Scheduler started
+2025-05-16 21:07:05,016 DEBUG:Looking for jobs to run
+2025-05-16 21:07:05,016 DEBUG:Next wakeup is due at 2025-05-16 21:17:05.013838-07:00 (in 599.996868 seconds)
+2025-05-16 21:07:05,047 INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://10.0.0.162:8000
+2025-05-16 21:07:05,047 INFO:[33mPress CTRL+C to quit[0m
+2025-05-16 21:07:14,851 INFO:127.0.0.1 - - [16/May/2025 21:07:14] "GET / HTTP/1.1" 200 -
+2025-05-16 21:07:15,594 INFO:127.0.0.1 - - [16/May/2025 21:07:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-16 21:12:36,361 INFO:127.0.0.1 - - [16/May/2025 21:12:36] "GET / HTTP/1.1" 200 -
+2025-05-16 21:17:05,033 DEBUG:Looking for jobs to run
+2025-05-16 21:17:05,080 INFO:Running job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-05-16 21:17:05 PDT)" (scheduled at 2025-05-16 21:17:05.013838-07:00)
+2025-05-16 21:17:05,085 DEBUG:Next wakeup is due at 2025-05-16 21:27:05.013838-07:00 (in 599.928485 seconds)
+2025-05-16 21:17:17,371 INFO:\u2705 Articles saved to DB.
+2025-05-16 21:17:17,382 INFO:\U0001f504 Aggregation complete.
+2025-05-16 21:17:17,384 INFO:Job "aggregate_news (trigger: interval[0:10:00], next run at: 2025-05-16 21:27:05 PDT)" executed successfully
