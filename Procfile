@@ -1,2 +1,2 @@
-web: python HotDogMMA.com.py
+web: python app.py
 
