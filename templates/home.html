@@ -22,16 +22,42 @@
             .coverage li { padding: 10px 0; border-top: 1px solid #e8ebef; }
             .intro { text-align: center; color: #5a6370; }
             .news-section { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-            @media (max-width: 640px) { .news-container { flex-direction: column; } }
+            .topic-selector { display: none; }
+            @media (max-width: 640px) {
+                body { padding: 16px; }
+                h1 { font-size: 2rem; }
+                .news-container { flex-direction: column; }
+                .topic-selector {
+                    display: flex; gap: 8px; position: sticky; top: 0; z-index: 10;
+                    margin: 20px 0 8px; padding: 10px; border: 1px solid #dce0e6;
+                    border-radius: 12px; background: #f5f6f8;
+                }
+                .topic-selector legend { font-size: .8rem; font-weight: bold; color: #5a6370; padding: 0 4px; }
+                .topic-selector label { flex: 1; text-align: center; cursor: pointer; }
+                .topic-selector input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+                .topic-selector span {
+                    display: block; padding: 14px 16px; border-radius: 8px; background: white;
+                    border: 1px solid #dce0e6; font-weight: bold; color: #173b6c;
+                }
+                .topic-selector input:checked + span { background: #173b6c; color: white; border-color: #173b6c; }
+                .topic-selector input:focus-visible + span { outline: 3px solid #bf5814; outline-offset: 3px; }
+                body:has(#topic-mma:checked) #boxing-news,
+                body:has(#topic-boxing:checked) #mma-news { display: none; }
+            }
         </style>
     </head>
     <body>
         <h1>HOTDOG FIGHTING</h1>
         <p class="intro">Fight news, grouped by story. Expand coverage to compare headlines from different publishers.</p>
         <p id="analytics-status" role="status" hidden></p>
+        <fieldset class="topic-selector">
+            <legend>Choose your topic</legend>
+            <label><input type="radio" name="topic" id="topic-mma" value="mma" aria-controls="mma-news" checked><span>MMA</span></label>
+            <label><input type="radio" name="topic" id="topic-boxing" value="boxing" aria-controls="boxing-news"><span>Boxing</span></label>
+        </fieldset>
         <div class="news-container">
-            <div class="news-section">
-                <h2>MMA News</h2>
+            <section class="news-section" id="mma-news" aria-labelledby="mma-heading">
+                <h2 id="mma-heading">MMA News</h2>
                 <ul>
                 {% for story in mma_articles %}
                     <li class="story-card">
@@ -59,9 +85,9 @@
                     <li>No stories yet. News will appear after the next refresh.</li>
                 {% endfor %}
                 </ul>
-            </div>
-            <div class="news-section">
-                <h2>Boxing News</h2>
+            </section>
+            <section class="news-section" id="boxing-news" aria-labelledby="boxing-heading">
+                <h2 id="boxing-heading">Boxing News</h2>
                 <ul>
                 {% for story in boxing_articles %}
                     <li class="story-card">
@@ -89,7 +115,7 @@
                     <li>No stories yet. News will appear after the next refresh.</li>
                 {% endfor %}
                 </ul>
-            </div>
+            </section>
         </div>
     </body>
     </html>
