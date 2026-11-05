@@ -212,4 +212,6 @@ def update_ai_groups(db_file):
             log.warning('AI grouping unavailable (%s); keeping stored groups and headline fallback', reason)
             break
     name_ai_groups(db_file)
+    from event_coverage import update_event_coverage
+    update_event_coverage(db_file)
     return reviewed

@@ -1,3 +1,5 @@
+{% from "story_card.html" import story_card %}
+{% from "event_card.html" import event_card %}
 
     <!DOCTYPE html>
     <html lang="en">
@@ -22,6 +24,13 @@
             .coverage li { padding: 10px 0; border-top: 1px solid #e8ebef; }
             .intro { text-align: center; color: #5a6370; }
             .news-section { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+            .event-hub { padding: 14px; margin: 0 0 18px; border: 2px solid #173b6c; border-radius: 12px; background: #eaf0f8; }
+            .event-heading { font-size: 1.2rem; font-weight: 800; }
+            .event-meta { display: block; font-size: .8rem; font-weight: normal; margin: 8px 0 0; color: #4a5666; }
+            .event-source { font-size: .85rem; }
+            .event-hub > ul { margin-bottom: 0; }
+            .event-hub .story-card:last-child { margin-bottom: 0; }
+            .feed-heading { color: #4a5666; font-size: .95rem; }
             .topic-selector { display: none; }
             @media (max-width: 640px) {
                 body { padding: 16px; }
@@ -57,59 +66,42 @@
         <div class="news-container">
             <section class="news-section" id="mma-news" aria-labelledby="mma-heading">
                 <h2 id="mma-heading">MMA News</h2>
+                {% if event_hubs %}
+                <h3 class="feed-heading">UFC event coverage</h3>
+                {% for hub in event_hubs %}
+                {{ event_card(hub) }}
+                {% endfor %}
+                <h3 class="feed-heading">Other MMA news</h3>
+                {% endif %}
+                {% if mma_groups %}
+                <h3 class="feed-heading">Story groups</h3>
                 <ul>
-                {% for story in mma_articles %}
-                    <li class="story-card">
-                        {% if story.articles|length > 1 %}
-                        <h3 class="story-title group-title">{{ story.title or story.lead.title }}</h3>
-                        <p class="story-meta">{{ story.articles|length }} articles &middot; {{ story.publisher_count }} publishers</p>
-                        {% else %}
-                        <a class="story-title" href="{{ story.lead.link }}" data-article-category="MMA">{{ story.lead.title }}</a>
-                        <p class="story-meta">{{ story.lead.publisher }} &middot; <time datetime="{{ story.lead.published }}">{{ story.lead.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></p>
-                        {% endif %}
-                        {% if story.articles|length > 1 %}
-                        <details>
-                            <summary>View all {{ story.articles|length }} articles · {{ story.publisher_count }} publisher{{ 's' if story.publisher_count != 1 else '' }}</summary>
-                            <ul class="coverage">
-                            {% for article in story.articles %}
-                                <li><a href="{{ article.link }}" data-article-category="MMA">{{ article.title }}</a>
-                                    <div class="story-meta">{{ article.publisher }} · <time datetime="{{ article.published }}">{{ article.date.strftime('%b %d, %Y · %H:%M UTC') }}</time></div>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        </details>
-                        {% endif %}
-                    </li>
-                {% else %}
-                    <li>No stories yet. News will appear after the next refresh.</li>
+                {% for story in mma_groups %}
+                    {{ story_card(story, "MMA") }}
                 {% endfor %}
                 </ul>
+                {% endif %}
+                {% if mma_timeline %}
+                <h3 class="feed-heading">Latest articles &amp; past events</h3>
+                {% for entry in mma_timeline %}
+                {% if entry.kind == 'event' %}
+                    {{ event_card(entry.value) }}
+                {% else %}
+                <ul>
+                    {{ story_card(entry.value, "MMA") }}
+                </ul>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% if not mma_articles and not event_hubs and not mma_timeline %}
+                <p>No stories yet. News will appear after the next refresh.</p>
+                {% endif %}
             </section>
             <section class="news-section" id="boxing-news" aria-labelledby="boxing-heading">
                 <h2 id="boxing-heading">Boxing News</h2>
                 <ul>
                 {% for story in boxing_articles %}
-                    <li class="story-card">
-                        {% if story.articles|length > 1 %}
-                        <h3 class="story-title group-title">{{ story.title or story.lead.title }}</h3>
-                        <p class="story-meta">{{ story.articles|length }} articles &middot; {{ story.publisher_count }} publishers</p>
-                        {% else %}
-                        <a class="story-title" href="{{ story.lead.link }}" data-article-category="Boxing">{{ story.lead.title }}</a>
-                        <p class="story-meta">{{ story.lead.publisher }} &middot; <time datetime="{{ story.lead.published }}">{{ story.lead.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></p>
-                        {% endif %}
-                        {% if story.articles|length > 1 %}
-                        <details>
-                            <summary>View all {{ story.articles|length }} articles · {{ story.publisher_count }} publisher{{ 's' if story.publisher_count != 1 else '' }}</summary>
-                            <ul class="coverage">
-                            {% for article in story.articles %}
-                                <li><a href="{{ article.link }}" data-article-category="Boxing">{{ article.title }}</a>
-                                    <div class="story-meta">{{ article.publisher }} · <time datetime="{{ article.published }}">{{ article.date.strftime('%b %d, %Y · %H:%M UTC') }}</time></div>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        </details>
-                        {% endif %}
-                    </li>
+                    {{ story_card(story, "Boxing") }}
                 {% else %}
                     <li>No stories yet. News will appear after the next refresh.</li>
                 {% endfor %}

@@ -1,0 +1,24 @@
+{% macro story_card(story, category) %}
+<li class="story-card">
+    {% if story.event_relation == 'fighter' %}<p class="story-meta">Fighter coverage</p>{% endif %}
+    {% if story.articles|length > 1 %}
+    <h3 class="story-title group-title">{{ story.title or story.lead.title }}</h3>
+    <p class="story-meta">{{ story.articles|length }} articles &middot; {{ story.publisher_count }} publisher{{ 's' if story.publisher_count != 1 else '' }}</p>
+    {% else %}
+    <a class="story-title" href="{{ story.lead.link }}" data-article-category="{{ category }}">{{ story.lead.title }}</a>
+    <p class="story-meta">{{ story.lead.publisher }} &middot; <time datetime="{{ story.lead.published }}">{{ story.lead.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></p>
+    {% endif %}
+    {% if story.articles|length > 1 %}
+    <details>
+        <summary>View all {{ story.articles|length }} articles &middot; {{ story.publisher_count }} publisher{{ 's' if story.publisher_count != 1 else '' }}</summary>
+        <ul class="coverage">
+        {% for article in story.articles %}
+            <li><a href="{{ article.link }}" data-article-category="{{ category }}">{{ article.title }}</a>
+                <div class="story-meta">{{ article.publisher }} &middot; <time datetime="{{ article.published }}">{{ article.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></div>
+            </li>
+        {% endfor %}
+        </ul>
+    </details>
+    {% endif %}
+</li>
+{% endmacro %}

@@ -1,0 +1,10 @@
+{% from "story_card.html" import story_card %}
+{% macro event_card(hub) %}
+<details class="event-hub">
+    <summary class="event-heading">{{ hub.label }}
+        <span class="event-meta">{% if hub.past %}Past event &middot; {% endif %}{{ hub.date.strftime('%b %d, %Y - %H:%M UTC') }} &middot; {{ hub.stories|length }} topics &middot; {{ hub.article_count }} articles</span>
+    </summary>
+    <p class="event-source"><a href="{{ hub.url }}">Official fight card</a>{% if hub.stale %} &middot; Card data awaiting refresh{% endif %}</p>
+    <ul>{% for story in hub.stories %}{{ story_card(story, "MMA") }}{% endfor %}</ul>
+</details>
+{% endmacro %}

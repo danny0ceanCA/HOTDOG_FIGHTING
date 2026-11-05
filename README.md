@@ -83,3 +83,32 @@ One run processes up to 120 pending headlines from the latest 400 per category; 
 API implementation reference: https://developers.openai.com/api/docs/guides/structured-outputs
 
 AI coverage groups also receive cached, funny, loud titles. The title is plain text; all publisher links sit inside expandable coverage. Headlines are the only naming source; allegations and rumors must retain attribution. Naming processes at most 50 unnamed groups per refresh in one additional API request. Run `python app.py --name-stories` to backfill names without fetching feeds or regrouping articles. Failed naming falls back to the original lead headline.
+
+## Official UFC event cache
+
+The launcher refreshes the official `https://www.ufc.com/events` listing and linked event pages every six hours. It caches up to 12 events, from the past 14 days through the next 120 days. The listing is limited to the events UFC includes on that page; this is not a complete historical archive.
+
+```powershell
+python app.py --refresh-events
+python app.py --events-status
+```
+
+`--refresh-events` forces a refresh; scheduled checks respect a persisted six-hour interval, including after failures. Event pages are fetched with at most three concurrent requests, time and size limits, and no automatic retries. HTTPS certificate and hostname checks remain enabled. The `truststore` SSL context uses the operating system trust store and can obtain missing intermediates (see https://truststore.readthedocs.io/en/latest/). No browser automation, cookies, or access-control bypass is required for the locally verified source.
+
+The cached records contain event URLs/IDs, titles, main-card start times in UTC, bout pairings, weight classes, fighter names, and official athlete profile IDs/URLs. These IDs anchor event candidates. The homepage uses AI-confirmed event assignments to place related topic groups under UFC event hubs.
+
+`GET /api/events` returns the public cached records, last attempt/success timestamps, per-event last-success times, and staleness flags. It never fetches UFC pages during a web request. On a failed listing or card parse, the last successful data remains in SQLite and the status reports the failure. A listed event can have no usable card yet; it returns an empty bout list with a stale flag, rather than invented fighters. Unexpected markup or incomplete fighter pairings are rejected. Each changed card is saved in `ufc_card_history`, preserving prior pairings when fighters are replaced; unchanged cards do not add duplicate snapshots. Removed events are retained in cache and become stale when no longer refreshed. Public listings can still change or block automated access in future; check the cached status rather than assuming freshness.
+
+## Event hubs and topic coverage
+
+MMA coverage is prioritized as numbered UFC events, Fight Nights, other multi-article story groups, then individual articles. Priority is applied across the latest 400 articles before the 50-topic display limit, so newer singles cannot crowd event coverage off the page. Each event retains separate topic cards (e.g. announcement, preview, result); topic coverage links and funny group names are preserved. Boxing continues to use the existing topic feed. Only upcoming/current event hubs receive priority (numbered events, then Fight Nights). Past hubs are mixed with individual articles after other topic groups, sorted together by their newest article publication time rather than the event date. An event becomes past six hours after its scheduled main-card start (a grace window because the source does not provide reliable completion times). Event hubs start collapsed and past cards carry a Past event label. Within each priority tier, coverage is ordered by its newest article, with stories and articles newest first. If higher-priority coverage fills the 50-topic limit, lower-priority singles are omitted.
+
+Fighter names generate candidates within 60 days before an event through seven days afterward. Explicit references to a verified numbered event can match earlier than 60 days, so advance announcements and withdrawal coverage are not excluded merely because the card is months away. AI distinguishes specific event coverage from current news/interviews/analysis about roster fighters. Current fighter coverage may join an upcoming card even without naming the event, and is labeled Fighter coverage. Archives, explicitly different matchups/events, personal disputes, and ambiguous identities remain outside. Fighter-only coverage is not attached to past cards. Candidate selection alone does not assign an event. Current rosters generate fighter candidates; old full-fight videos are excluded unless an explicit event reference warrants review. Unknown events, incomplete responses, and confidence below 0.85 do not produce links. Uncertain/unreviewed topics remain visible in the regular feed.
+
+Event decisions are saved in `event_story_links` and cached against a fingerprint of the topic headlines and candidate cards. New coverage or changed fight cards invalidates the decision until rechecked. Matching runs after headline grouping and event refreshes, at most 40 changed candidate topics in one additional API request per run. It sends only public headlines/dates and cached event names/fighter pairings. There are no AI calls during page loads. A missing key or failed call leaves the regular topic feed usable.
+
+```powershell
+python app.py --match-events
+```
+
+Use that command to review the current candidate backlog without fetching feeds or regrouping topics. `/api/events` remains available for checking cached card freshness. Event hubs link back to the official card and show a notice when card data is stale.
