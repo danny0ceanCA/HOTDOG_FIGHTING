@@ -39,7 +39,8 @@ class AITests(unittest.TestCase):
         self.assertEqual(update_ai_groups(self.db), 0)
         self.assertEqual(request.call_count, 1)
         html = self.app.test_client().get('/').get_data(as_text=True)
-        self.assertIn('View all 2 articles', html)
+        self.assertEqual(html.count('class="story-card"'), 2)
+        self.assertNotIn('<details', html)
         self.assertEqual(request.call_count, 1)
 
     @patch('ai_grouping.request_assignments')
@@ -52,7 +53,7 @@ class AITests(unittest.TestCase):
             new_id = conn.execute('SELECT MAX(id) FROM articles').fetchone()[0]
         request.return_value = [dict(id=new_id, story_id=self.ids[0], confidence=.95)]
         self.assertEqual(update_ai_groups(self.db), 1)
-        self.assertIn('View all 3 articles', self.app.test_client().get('/').get_data(as_text=True))
+        self.assertEqual(self.app.test_client().get('/').get_data(as_text=True).count('class="story-card"'), 3)
 
     @patch('ai_grouping.request_assignments', side_effect=TimeoutError)
     def test_failure_leaves_pending_and_fallback_available(self, request):
@@ -105,11 +106,10 @@ class AITests(unittest.TestCase):
         self.assertEqual(name_ai_groups(self.db), 0)
         self.assertEqual(request_json.call_count, 1)
         html = self.app.test_client().get('/').get_data(as_text=True)
-        self.assertIn('HEAVYWEIGHT DRAMA GOES BOOM!</h3>', html)
-        start, coverage = html.split('<details>', 1)
-        self.assertNotIn('https://example.com/0', start)
-        self.assertIn('https://example.com/0', coverage)
-        self.assertIn('https://example.com/1', coverage)
+        self.assertNotIn('HEAVYWEIGHT DRAMA GOES BOOM!', html)
+        self.assertNotIn('<details', html)
+        self.assertIn('https://example.com/0', html)
+        self.assertIn('https://example.com/1', html)
 
     @patch('ai_grouping.request_assignments')
     @patch('ai_grouping.request_json')
@@ -120,4 +120,4 @@ class AITests(unittest.TestCase):
         self.assertEqual(name_ai_groups(self.db), 0)
         request_json.side_effect = TimeoutError
         self.assertEqual(name_ai_groups(self.db), 0)
-        self.assertIn('View all 2 articles', self.app.test_client().get('/').get_data(as_text=True))
+        self.assertEqual(self.app.test_client().get('/').get_data(as_text=True).count('class="story-card"'), 2)

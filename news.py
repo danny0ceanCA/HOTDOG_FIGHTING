@@ -178,6 +178,6 @@ def aggregate_news(db_file, sources=None):
                 continue
             inserted += save_articles_to_db(db_file, articles)
     log.info('Refresh complete: %d new articles', inserted)
-    from ai_grouping import update_ai_groups
-    update_ai_groups(db_file)
+    from event_coverage import update_event_coverage
+    update_event_coverage(db_file)
     return inserted

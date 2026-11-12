@@ -61,7 +61,7 @@ class DatabaseTests(unittest.TestCase):
             if url == 'bad':
                 raise RuntimeError('test failure')
             return [article]
-        with patch('news.fetch_news_rss', side_effect=fetch), patch('ai_grouping.update_ai_groups'):
+        with patch('news.fetch_news_rss', side_effect=fetch), patch('event_coverage.update_event_coverage'):
             self.assertEqual(news.aggregate_news(self.db, {'MMA': ['bad', 'good']}), 1)
 
 

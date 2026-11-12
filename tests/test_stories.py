@@ -35,7 +35,7 @@ class StoryTests(unittest.TestCase):
         self.assertEqual(len(groups), 1)
         self.assertNotIn('&amp;', groups[0]['lead']['title'])
 
-    def test_expandable_coverage_rendered(self):
+    def test_similar_headlines_remain_individual_articles(self):
         import tempfile
         from pathlib import Path
         from app import create_app
@@ -47,9 +47,9 @@ class StoryTests(unittest.TestCase):
                 row('Jon Jones vs Tom Aspinall title fight announced'),
                 row('Jon Jones vs Tom Aspinall title fight announced', 'two')]])
             html = app.test_client().get('/').get_data(as_text=True)
-            self.assertEqual(html.count('class="story-card"'), 1)
-            self.assertIn('<details>', html)
-            self.assertIn('View all 2 articles', html)
+            self.assertEqual(html.count('class="story-card"'), 2)
+            self.assertNotIn('<details', html)
+            self.assertNotIn('View all', html)
             self.assertIn('https://two.com/story', html)
 
 
