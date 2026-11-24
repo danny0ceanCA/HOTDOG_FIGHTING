@@ -33,14 +33,27 @@ def normalize(value):
     return ' '.join(re.findall(r'[a-z0-9]+', value))
 
 
+def event_number(event):
+    match = re.fullmatch(r'ufc-(\d+)', event['slug'])
+    return match[1] if match else None
+
+
+def event_label(event):
+    number = event_number(event)
+    return 'UFC ' + number if number else 'UFC Fight Night: ' + event['title']
+
+
+def mentions_number(normalized_title, number):
+    return bool(number and f' ufc {number} ' in f' {normalized_title} ')
+
+
 def candidate_events(group, events):
     text = ' ' + normalize(' '.join(a['title'] for a in group['articles'])) + ' '
     published = group['lead']['date']
     candidates = []
     for event in events:
         start = datetime.fromisoformat(event['starts_at'])
-        number = re.fullmatch(r'ufc-(\d+)', event['slug'])
-        explicit = number and f' ufc {number[1]} ' in text
+        explicit = mentions_number(text, event_number(event))
         # A verified event number is stronger evidence than the roster/date
         # heuristic: announcements and withdrawals can arrive months early.
         if published > start + timedelta(days=7) or (not explicit and published < start - timedelta(days=60)):
@@ -66,38 +79,66 @@ def fingerprint(group, candidates):
     return hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
 
 
-def read_article_topics(conn, category='MMA', limit=400):
+def read_article_topics(conn, category='MMA', limit=400, event=None):
     """One classifier input per article; historical story assignments are ignored."""
+    query = '''SELECT a.id, a.title, a.link, a.published_date, l.event_url, l.input_hash, l.relation
+               FROM articles AS a LEFT JOIN event_story_links AS l ON l.story_key = 'article:' || a.id
+               WHERE a.category = ?'''
+    params = [category]
+    if event is not None:
+        matches = 'l.event_url = ?'
+        params.append(event['url'])
+        number = event_number(event)
+        if number:
+            # Numbered events can have tags before the first AI review. Match the
+            # same decoded, normalized words as the homepage, including punctuation.
+            conn.create_function('names_event', 1,
+                lambda title: mentions_number(normalize(html.unescape(title)), number))
+            matches += ' OR names_event(a.title)'
+        query += f' AND ({matches})'
+    query += ' ORDER BY datetime(a.published_date) DESC, a.id DESC LIMIT ?'
+    params.append(limit)
     result = []
-    for aid, title, link, published in conn.execute('''SELECT id,title,link,published_date FROM articles
-            WHERE category=? ORDER BY datetime(published_date) DESC,id DESC LIMIT ?''', (category, limit)):
+    for aid, title, link, published, url, digest, relation in conn.execute(query, params):
         host = (urlsplit(link).hostname or '').removeprefix('www.')
         article = dict(id=aid, title=html.unescape(title), link=link, published=published,
                        date=datetime.fromisoformat(published), publisher=PUBLISHERS.get(host, host))
-        result.append(dict(story_key=f'article:{aid}', lead=article, articles=[article]))
+        result.append(dict(story_key=f'article:{aid}', lead=article, articles=[article],
+                           decision=(url, digest, relation)))
     return result
 
 
 def article_feed(db_file, conn, category, limit=50):
     events = cached_events(db_file)['events'] if category == 'MMA' else []
-    saved = {r[0]: (r[1], r[2], r[3]) for r in conn.execute(
-        'SELECT story_key,event_url,input_hash,relation FROM event_story_links')}
+    return _tagged_articles(read_article_topics(conn, category, limit), events)
+
+
+def event_article_feed(db_file, conn, slug):
+    """Return a known event and all its currently tagged articles, newest first."""
+    events = cached_events(db_file)['events']
+    event = next((event for event in events if event['slug'] == slug), None)
+    if event is None:
+        return None
+    topics = read_article_topics(conn, limit=-1, event=event)
+    articles = _tagged_articles(topics, events)
+    return dict(event, label=event_label(event)), [
+        a for a in articles if any(tag['slug'] == slug for tag in a['event_tags'])]
+
+
+def _tagged_articles(topics, events):
     articles = []
-    for item in read_article_topics(conn, category, limit):
+    for item in topics:
         article = item['lead']
         article['event_tags'] = []
         candidates = candidate_events(item, events)
-        decision = saved.get(item['story_key'])
+        url, digest, relation = item['decision']
         for event in candidates:
-            number = re.fullmatch(r'ufc-(\d+)', event['slug'])
-            explicit = number and f' ufc {number[1]} ' in ' ' + normalize(article['title']) + ' '
-            confirmed = (decision and decision[0] == event['url'] and
-                         decision[1] == fingerprint(item, candidates))
+            explicit = mentions_number(normalize(article['title']), event_number(event))
+            confirmed = url == event['url'] and digest == fingerprint(item, candidates)
             past = datetime.fromisoformat(event['starts_at']) + timedelta(hours=6) < datetime.now(timezone.utc)
-            if explicit or (confirmed and not (past and decision[2] == 'fighter')):
-                article['event_tags'].append(dict(url=event['url'],
-                    label='UFC ' + number[1] if number else 'UFC Fight Night: ' + event['title'],
-                    fighter=bool(not explicit and decision[2] == 'fighter')))
+            if explicit or (confirmed and not (past and relation == 'fighter')):
+                article['event_tags'].append(dict(url=event['url'], slug=event['slug'], label=event_label(event),
+                                                  fighter=not explicit and relation == 'fighter'))
         articles.append(article)
     return articles
 
@@ -122,12 +163,11 @@ def _update_event_coverage(db_file):
         return 0
     with closing(sqlite3.connect(db_file, timeout=30)) as conn:
         topics = read_article_topics(conn)
-        saved = dict(conn.execute('SELECT story_key,input_hash FROM event_story_links'))
     pending = []
     for topic in topics:
         candidates = candidate_events(topic, events)
         digest = fingerprint(topic, candidates)
-        if candidates and saved.get(topic['story_key']) != digest:
+        if candidates and topic['decision'][1] != digest:
             pending.append((topic, candidates, digest))
         if len(pending) == 40:
             break

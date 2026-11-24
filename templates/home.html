@@ -1,82 +1,20 @@
-{% macro article_list(articles, category) %}
-<ul>
-{% for article in articles %}
-    <li class="story-card">
-        {% if article.event_tags %}
-        <div class="event-tags" aria-label="Event tags">
-            {% for tag in article.event_tags %}<a class="event-tag" href="{{ tag.url }}"{% if tag.fighter %} title="Coverage of a fighter on this card"{% endif %}>{{ tag.label }}</a>{% endfor %}
-        </div>
-        {% endif %}
-        <a class="story-title" href="{{ article.link }}" data-article-category="{{ category }}">{{ article.title }}</a>
-        <p class="story-meta">{{ article.publisher }} &middot; <time datetime="{{ article.published }}">{{ article.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></p>
-    </li>
-{% else %}
-    <li>No articles yet. News will appear after the next refresh.</li>
-{% endfor %}
-</ul>
-{% endmacro %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HOTDOG FIGHTING</title>
-        <!-- Google Analytics -->
-        <script src="/static/analytics.js"></script>
-        <!-- Google Ads -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 0 auto; padding: 24px; max-width: 1400px; background: #f5f6f8; color: #20232a; }
-            h1 { text-align: center; font-size: 3em; }
-            .news-container { display: flex; gap: 20px; justify-content: space-around; }
-            .news-section ul { list-style-type: none; padding: 0; }
-            .story-card { margin-bottom: 12px; padding: 18px; background: white; border: 1px solid #dce0e6; border-radius: 10px; }
-            .story-title { font-size: 1.1rem; font-weight: 600; line-height: 1.45; color: #173b6c; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-            .story-meta { color: #5a6370; font-size: .85rem; margin: 8px 0; }
-            .news-section { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-            .event-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-            .event-tag { padding: 4px 9px; border-radius: 999px; background: #e4edf9; color: #173b6c; font-size: .78rem; font-weight: bold; text-decoration: none; }
-            .topic-selector { display: none; }
-            @media (max-width: 640px) {
-                body { padding: 16px; }
-                h1 { font-size: 2rem; }
-                .news-container { flex-direction: column; }
-                .topic-selector {
-                    display: flex; gap: 8px; position: sticky; top: 0; z-index: 10;
-                    margin: 20px 0 8px; padding: 10px; border: 1px solid #dce0e6;
-                    border-radius: 12px; background: #f5f6f8;
-                }
-                .topic-selector legend { font-size: .8rem; font-weight: bold; color: #5a6370; padding: 0 4px; }
-                .topic-selector label { flex: 1; text-align: center; cursor: pointer; }
-                .topic-selector input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-                .topic-selector span {
-                    display: block; padding: 14px 16px; border-radius: 8px; background: white;
-                    border: 1px solid #dce0e6; font-weight: bold; color: #173b6c;
-                }
-                .topic-selector input:checked + span { background: #173b6c; color: white; border-color: #173b6c; }
-                .topic-selector input:focus-visible + span { outline: 3px solid #bf5814; outline-offset: 3px; }
-                body:has(#topic-mma:checked) #boxing-news,
-                body:has(#topic-boxing:checked) #mma-news { display: none; }
-            }
-        </style>
-    </head>
-    <body>
-        <h1>HOTDOG FIGHTING</h1>
-        <p id="analytics-status" role="status" hidden></p>
-        <fieldset class="topic-selector">
-            <legend>Choose your topic</legend>
-            <label><input type="radio" name="topic" id="topic-mma" value="mma" aria-controls="mma-news" checked><span>MMA</span></label>
-            <label><input type="radio" name="topic" id="topic-boxing" value="boxing" aria-controls="boxing-news"><span>Boxing</span></label>
-        </fieldset>
-        <div class="news-container">
-            <section class="news-section" id="mma-news" aria-labelledby="mma-heading">
-                <h2 id="mma-heading">MMA News</h2>
-                {{ article_list(mma_articles, 'MMA') }}
-            </section>
-            <section class="news-section" id="boxing-news" aria-labelledby="boxing-heading">
-                <h2 id="boxing-heading">Boxing News</h2>
-                {{ article_list(boxing_articles, 'Boxing') }}
-            </section>
-        </div>
-    </body>
-    </html>
+{% extends "base.html" %}
+{% from "articles.html" import article_list %}
+{% block content %}
+<h1>HOTDOG FIGHTING</h1>
+<fieldset class="topic-selector">
+    <legend>Choose your topic</legend>
+    <label><input type="radio" name="topic" id="topic-mma" value="mma" aria-controls="mma-news" checked><span>MMA</span></label>
+    <label><input type="radio" name="topic" id="topic-boxing" value="boxing" aria-controls="boxing-news"><span>Boxing</span></label>
+</fieldset>
+<div class="news-container">
+    <section class="news-section" id="mma-news" aria-labelledby="mma-heading">
+        <h2 id="mma-heading">MMA News</h2>
+        {{ article_list(mma_articles, 'MMA') }}
+    </section>
+    <section class="news-section" id="boxing-news" aria-labelledby="boxing-heading">
+        <h2 id="boxing-heading">Boxing News</h2>
+        {{ article_list(boxing_articles, 'Boxing') }}
+    </section>
+</div>
+{% endblock %}

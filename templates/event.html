@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "articles.html" import article_list %}
+{% block title %}{{ event_label }} coverage | HOTDOG FIGHTING{% endblock %}
+{% block content %}
+<main class="news-section event-coverage">
+    <a href="{{ url_for('home', _anchor='mma-news') }}">&larr; Back to MMA news</a>
+    <header>
+        <h1>{{ event_label }}</h1>
+        {% if event.title not in event_label %}<p>{{ event.title }}</p>{% endif %}
+        <a href="{{ event.url }}">Official fight card</a>
+    </header>
+    <h2>Latest coverage</h2>
+    {{ article_list(articles, 'MMA', current_event=event.slug) }}
+</main>
+{% endblock %}

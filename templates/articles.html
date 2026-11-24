@@ -1,0 +1,25 @@
+{% macro article_list(articles, category, current_event=none) %}
+<ul>
+{% for article in articles %}
+    <li class="story-card">
+        {% set tags = article.event_tags if current_event is none else
+                      article.event_tags|selectattr('slug', 'equalto', current_event)|selectattr('fighter')|list %}
+        {% if tags %}
+        <div class="event-tags" aria-label="Event tags">
+            {% for tag in tags %}
+                {% if current_event is none %}
+                <a class="event-tag" href="{{ url_for('event_page', slug=tag.slug) }}">{% if tag.fighter %}Fighter on {% endif %}{{ tag.label }}</a>
+                {% else %}
+                <span class="event-tag">Fighter on {{ tag.label }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <a class="story-title" href="{{ article.link }}" data-article-category="{{ category }}">{{ article.title }}</a>
+        <p class="story-meta">{{ article.publisher }} &middot; <time datetime="{{ article.published }}">{{ article.date.strftime('%b %d, %Y - %H:%M UTC') }}</time></p>
+    </li>
+{% else %}
+    <li>{% if current_event %}No articles tagged for this event yet.{% else %}No articles yet. News will appear after the next refresh.{% endif %}</li>
+{% endfor %}
+</ul>
+{% endmacro %}

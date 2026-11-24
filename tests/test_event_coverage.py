@@ -6,6 +6,8 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from unittest.mock import patch
 
+from bs4 import BeautifulSoup
+
 from app import create_app
 from event_coverage import update_event_coverage, candidate_events, article_feed
 from news import save_articles_to_db
@@ -99,6 +101,67 @@ class EventCoverageTests(unittest.TestCase):
         save_articles_to_db(self.db, [dict(category='MMA', title='Withdrawal from UFC 336', link='https://early.com/1', published_date=self.now)])
         early = next(a for a in self.feed() if a['title'] == 'Withdrawal from UFC 336')
         self.assertEqual(early['event_tags'][0]['label'], 'UFC 336')
+
+    @patch('event_coverage.request_json')
+    def test_follow_event_tag_to_ordered_coverage_and_official_card(self, request):
+        interview = 'Johnny Walker reflects on his career'
+        save_articles_to_db(self.db, [dict(category='MMA', title=interview, link='https://source.com/interview',
+            published_date=(datetime.fromisoformat(self.now) - timedelta(hours=2)).isoformat())])
+
+        def decisions(key, model, prompt, inputs, schema):
+            result = self.decisions(key, model, prompt, inputs, schema)
+            for article_id, data in inputs.items():
+                if data['headlines'][0]['title'] == interview:
+                    result[article_id]['relation'] = 'fighter'
+            return result
+
+        request.side_effect = decisions
+        update_event_coverage(self.db)
+        client = self.app.test_client()
+        home = BeautifulSoup(client.get('/').data, 'html.parser')
+        tags = home.select('a.event-tag')
+        self.assertEqual({tag['href'] for tag in tags}, {'/events/ufc-test'})
+        card_label = 'UFC Fight Night: Test vs Opponent'
+        self.assertCountEqual([tag.get_text(strip=True) for tag in tags],
+                              [card_label, card_label, f'Fighter on {card_label}'])
+
+        response = client.get(tags[0]['href'])
+        self.assertEqual(response.status_code, 200)
+        event = BeautifulSoup(response.data, 'html.parser')
+        official = event.find('a', href=self.url)
+        self.assertIsNotNone(official)
+        self.assertIn('official', official.get_text(strip=True).lower())
+        self.assertEqual([a['href'] for a in event.select('a.story-title')],
+                         ['https://source.com/1', 'https://source.com/0', 'https://source.com/interview'])
+        interview_card = event.find('a', href='https://source.com/interview').find_parent('li')
+        self.assertIn(f'Fighter on {card_label}', interview_card.get_text(' ', strip=True))
+        self.assertEqual(request.call_count, 1)
+
+    def test_numbered_event_shows_explicit_tags_beyond_homepage_and_ai_limits(self):
+        with closing(sqlite3.connect(self.db)) as conn, conn:
+            conn.execute('INSERT INTO ufc_events(url,slug,title,starts_at,listed_at) VALUES(?,?,?,?,?)',
+                         ('https://www.ufc.com/event/ufc-336', 'ufc-336', 'Main event', self.now, self.now))
+        old_date = (datetime.fromisoformat(self.now) - timedelta(days=2)).isoformat()
+        save_articles_to_db(self.db, [dict(category='MMA', title='UFC 336 card announcement',
+            link='https://source.com/announcement', published_date=old_date)])
+        save_articles_to_db(self.db, [dict(category='MMA', title=f'Other news {i}',
+            link=f'https://other.com/{i}', published_date=self.now) for i in range(401)])
+        save_articles_to_db(self.db, [dict(category='MMA', title='UFC 336 weigh-ins',
+            link='https://source.com/weigh-ins', published_date=self.now)])
+
+        client = self.app.test_client()
+        with patch('event_coverage.request_json') as request:
+            home = BeautifulSoup(client.get('/').data, 'html.parser')
+            self.assertIsNone(home.find('a', href='https://source.com/announcement'))
+            tag = home.find('a', href='/events/ufc-336')
+            self.assertIsNotNone(tag)
+            event = BeautifulSoup(client.get(tag['href']).data, 'html.parser')
+            self.assertEqual([a['href'] for a in event.select('a.story-title')],
+                             ['https://source.com/weigh-ins', 'https://source.com/announcement'])
+            request.assert_not_called()
+
+    def test_unknown_event_page_is_not_found(self):
+        self.assertEqual(self.app.test_client().get('/events/no-such-card').status_code, 404)
 
     def test_archives_and_old_generic_mentions_not_candidates(self):
         event = cached_events(self.db)['events'][0]

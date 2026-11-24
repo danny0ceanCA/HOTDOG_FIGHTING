@@ -1,6 +1,6 @@
 # Hotdog Fighting
 
-A Flask news feed for MMA and boxing. Every article appears individually, newest publication date first. Event badges link relevant MMA articles to official UFC cards. There are no topic groups, event hubs, generated group names, or event-based ranking. The mobile MMA/Boxing selector is preserved.
+A Flask news feed for MMA and boxing. Every article appears individually, newest publication date first. Tap a UFC event tag to see all tagged articles for that card in the same order. The event page includes a separate link to the official UFC card. On mobile, use the topic selector to switch between MMA and boxing.
 
 ## Run locally
 
@@ -46,7 +46,7 @@ RSS ingestion has transient retries, download time/size limits, per-entry valida
 
 The official `https://www.ufc.com/events` listing supplies up to 12 cached cards from the past 14 days through the next 120 days. Cached data includes start times, bout pairings, athlete profile IDs and names. The reader uses `truststore` with certificate and hostname checks enabled. Card changes retain history in `ufc_card_history`. Failed requests/parses preserve last-good snapshots and record staleness. `GET /api/events` exposes public cached data without triggering a fetch.
 
-Explicit references to verified numbered events can display badges immediately. AI reviews up to 40 changed candidate articles per run using public headline/date and cached card evidence. Roster mentions use a 60-day pre-event window; explicit numbered-event references can match farther ahead. Coverage through seven days after an event remains eligible. Archived full-fight videos and ambiguous identities are excluded from roster matching. Current fighter news may be tagged to an upcoming card, with a tooltip distinguishing fighter coverage. The six-hour main-card grace window avoids treating an in-progress event as past.
+Explicit references to verified numbered events can display badges immediately. AI reviews up to 40 changed candidate articles per run using public headline/date and cached card evidence. Roster mentions use a 60-day pre-event window; explicit numbered-event references can match farther ahead. Coverage through seven days after an event remains eligible. Archived full-fight videos and ambiguous identities are excluded from roster matching. A tag such as “Fighter on UFC 336” identifies coverage of an athlete on an upcoming card. The six-hour main-card grace window avoids treating an in-progress event as past.
 
 Decisions are cached per article in `event_story_links`, validated against known events and confidence >= 0.85, and invalidated when article/card inputs change. OpenAI requests use structured output, `store=false`, and no automatic retries. Usage is billed to the configured OpenAI project. Without a key or when the API fails, articles remain visible and explicit numbered-event badges still work. Page loads never call AI. Automatic story grouping and group naming are disabled; historical assignments/titles remain in SQLite but do not affect display or tagging.
 

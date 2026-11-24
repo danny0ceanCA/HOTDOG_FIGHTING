@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>{% block title %}HOTDOG FIGHTING{% endblock %}</title>
+    <!-- Google Analytics -->
+    <script src="{{ url_for('static', filename='analytics.js') }}"></script>
+    <!-- Google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2588231783119866" crossorigin="anonymous"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0 auto; padding: 24px; max-width: 1400px; background: #f5f6f8; color: #20232a; }
+        h1 { text-align: center; font-size: 3em; }
+        .news-container { display: flex; gap: 20px; justify-content: space-around; }
+        .news-section ul { list-style-type: none; padding: 0; }
+        .story-card { margin-bottom: 12px; padding: 18px; background: white; border: 1px solid #dce0e6; border-radius: 10px; }
+        .story-title { font-size: 1.1rem; font-weight: 600; line-height: 1.45; color: #173b6c; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .story-meta { color: #5a6370; font-size: .85rem; margin: 8px 0; }
+        .news-section { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+        .event-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+        .event-tag { padding: 4px 9px; border-radius: 999px; background: #e4edf9; color: #173b6c; font-size: .78rem; font-weight: bold; text-decoration: none; }
+        .event-coverage { max-width: 800px; margin: 0 auto; }
+        .event-coverage header { margin: 24px 0; }
+        .event-coverage h1 { margin: 0; text-align: left; }
+        .event-coverage a:not(.story-title, .event-tag) { color: #173b6c; }
+        .topic-selector { display: none; }
+        @media (max-width: 640px) {
+            body { padding: 16px; }
+            h1 { font-size: 2rem; }
+            .news-container { flex-direction: column; }
+            .topic-selector {
+                display: flex; gap: 8px; position: sticky; top: 0; z-index: 10;
+                margin: 20px 0 8px; padding: 10px; border: 1px solid #dce0e6;
+                border-radius: 12px; background: #f5f6f8;
+            }
+            .topic-selector legend { font-size: .8rem; font-weight: bold; color: #5a6370; padding: 0 4px; }
+            .topic-selector label { flex: 1; text-align: center; cursor: pointer; }
+            .topic-selector input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+            .topic-selector span {
+                display: block; padding: 14px 16px; border-radius: 8px; background: white;
+                border: 1px solid #dce0e6; font-weight: bold; color: #173b6c;
+            }
+            .topic-selector input:checked + span { background: #173b6c; color: white; border-color: #173b6c; }
+            .topic-selector input:focus-visible + span { outline: 3px solid #bf5814; outline-offset: 3px; }
+            body:has(#topic-mma:checked) #boxing-news,
+            body:has(#topic-boxing:checked) #mma-news { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <p id="analytics-status" role="status" hidden></p>
+    {% block content %}{% endblock %}
+</body>
+</html>

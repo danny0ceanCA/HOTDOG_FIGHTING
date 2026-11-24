@@ -8,12 +8,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, render_template
+from flask import Flask, abort, render_template
 
 from news import aggregate_news, init_db
 from ai_grouping import init_schema
 from ufc_events import init_events, refresh_events, cached_events
-from event_coverage import init_coverage, update_event_coverage, article_feed
+from event_coverage import article_feed, event_article_feed, init_coverage, update_event_coverage
 
 
 def refresh_event_data(db_file, force=False):
@@ -40,6 +40,15 @@ def create_app(db_file=None):
             return render_template('home.html',
                 mma_articles=article_feed(app.config['DB_FILE'], conn, 'MMA'),
                 boxing_articles=article_feed(app.config['DB_FILE'], conn, 'Boxing'))
+
+    @app.get('/events/<slug>')
+    def event_page(slug):
+        with closing(sqlite3.connect(app.config['DB_FILE'], timeout=30)) as conn:
+            coverage = event_article_feed(app.config['DB_FILE'], conn, slug)
+        if coverage is None:
+            abort(404)
+        event, articles = coverage
+        return render_template('event.html', event=event, event_label=event['label'], articles=articles)
 
     return app
 
